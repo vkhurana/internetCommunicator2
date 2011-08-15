@@ -1,0 +1,15 @@
+! + bring up/down services
+! + bring up/down servers - ftp, remote desk, vns, web, etc
+! + system commands for highest level users -- shutdown, restart
++ process manager
+? + push files? (pass url?)
+! + email files to users as attachment
++ reminders
++ maintain threadpools, assing a thread to each incomming user. each user runs in his own "thread"
+? + notes -- dup of email? probably gonna ditch this one
++ command prompt :)
++ perf indicators on host
+! + Wake On LAN
+? + use enums for all the command arguments? - this is mostly gonna be for internal commands
+? + have a overridden 'help string' function?
+? CommandSplitter wherever .split is used!!! - added to Utilites class - make sure i can use it everywhere...
