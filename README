@@ -1,0 +1,99 @@
+***********************
+SETUP
+***********************
+
+[Mandatory] Must have atleast one authorized user (admin)
+File: InternetCommunicator2\ConfigFiles\users.ini
+> This is needed so you can talk to your bot. It will be your own personal gmail address. In the above file add authorized users in this format:
+Snippet:
+email@gmail.com|[nickname]|[Admin|Unauthorized|Regular]
+
+[Mandatory] Needed for the google api to work
+File: InternetCommunicator2\SessionSettings.cs
+Snippet:
+> Get an apikey from google and replace it here.
+	public static string googleapikey = "";
+> Put in any referrer here.
+	public static string googlesitereferrer = "";
+
+More Info: This is needed for the google translate API to work, the bot says "hello" to you and greets you in a new language everytime :)
+
+
+[Mandatory] Must have local user name (gmail address) and password. This is the account the bot will use.
+[Optional - Additional users] Deployment users are useful if you maintain a seperate debug account and a deployment account.
+
+File: InternetCommunicator2\SessionSettings.cs
+
+More Info: This one is a bad way of enabling a debug/deployment mode ;>
+It prevents you from making multiple binaries, and picks a mode at run time.
+If the directory InternetCommunicator is running in has a file named "deploy" it gets into deployment mode and uses a deployment username and password to log in to google otherwise it uses your development username and password.
+If in deployed mode, there is also a way to switch between 2 deployment accounts. It looks for a file named "raptor" in the running directory and switches to the secondary deployment account if it is absent.
+
+Snippet:
+        public static string username
+        {
+            get
+            {
+                if (remoteserver)
+                {
+                    if (File.Exists("raptor"))
+                        return "deployment_user1@gmail.com";
+                    else
+                        return "deployment_user2@gmail.com";
+                }
+                else
+                {
+                    return "local_user@gmail.com";
+                }
+            }
+        }
+        public static string password
+        {
+            get
+            {
+                if (remoteserver)
+                {
+                    if (File.Exists("raptor"))
+                        return "deployment_user1_password";
+                    else
+                        return "deployment_user2_password";
+                }
+                else
+                {
+                    return "local_user_password";
+                }
+            }
+        }
+
+[Optional] - Nice to add, makes WOL Plugin easier to use
+File: WakeOnLANPlugin\WakeOnLan.cs
+More Info: In this file replace the your dev machine's mac address
+Snippet:
+	macAddress = "00-AA-BB-CC-DD-EE";
+
+[Optional] - Allows you to use the yahoo answers API plugin
+File: YahooAnswersPlugin\YahooAnswers.cs
+More Info: In this file get a yahoo app id and insert it at this line:
+Snippet:
+	private string YahooAppID = "";
+
+[Optional] - Allows you to use to send tweets
+File: InternetCommunicator2\InternalCommands\Tweet.cs
+More Info: Authorize an app on twitter, and get these 4 strings from there in this file to enable tweeting!
+Snippet:
+        private const string Token = "";
+        private const string TokenSecret = "";
+        private const string ConsumerKey = "";
+        private const string ConsumerKeySecret = "";
+
+[Optional] - Must add if you want to use the Email Plugin.
+File: EmailPlugin\EmailPluginFiles\credentials.ini
+More Info: In this file, add the username (including@gmail.com) and password of your gmail account
+
+***********************
+EXECUTE
+***********************
+1. run internetCommunicator2.exe
+2. go login to your gmail, see the bot online :)
+3. say hello
+4. say help
